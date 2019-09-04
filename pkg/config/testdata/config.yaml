@@ -1,0 +1,17 @@
+kubeconf: ""
+registries:
+  - name: testregistry
+    exclude:
+      - kube-public
+      - kube-system
+    config: |
+      {
+        "auths": {
+          "test.registry.com:80": {
+            "auth": "lf8pc3RvZmZlci5qb2hhbnNzb246MzU3N2FsYmlu"
+          }
+        },
+        "HttpHeaders": {
+          "User-Agent": "Docker-Client/19.03.1-ce (linux)"
+        }
+      }
