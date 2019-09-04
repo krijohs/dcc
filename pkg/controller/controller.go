@@ -5,7 +5,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"dockerconfig-controller/pkg/logger"
+	"github.com/krijohs/dcc/pkg/logger"
 
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/util/runtime"

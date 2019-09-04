@@ -3,8 +3,8 @@ package handler
 import (
 	"bytes"
 
-	"dockerconfig-controller/pkg/config"
-	"dockerconfig-controller/pkg/logger"
+	"github.com/krijohs/dcc/pkg/config"
+	"github.com/krijohs/dcc/pkg/logger"
 
 	"github.com/pkg/errors"
 	"k8s.io/client-go/kubernetes"

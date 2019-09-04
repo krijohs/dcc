@@ -7,12 +7,12 @@ import (
 	"syscall"
 	"time"
 
-	"dockerconfig-controller/pkg/config"
-	"dockerconfig-controller/pkg/controller"
-	"dockerconfig-controller/pkg/handler"
-	"dockerconfig-controller/pkg/k8sclient"
-	"dockerconfig-controller/pkg/logger"
-	"dockerconfig-controller/pkg/store/inmem"
+	"github.com/krijohs/dcc/pkg/config"
+	"github.com/krijohs/dcc/pkg/controller"
+	"github.com/krijohs/dcc/pkg/handler"
+	"github.com/krijohs/dcc/pkg/k8sclient"
+	"github.com/krijohs/dcc/pkg/logger"
+	"github.com/krijohs/dcc/pkg/store/inmem"
 )
 
 func main() {

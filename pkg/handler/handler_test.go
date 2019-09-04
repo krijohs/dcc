@@ -3,9 +3,9 @@ package handler
 import (
 	"testing"
 
-	"dockerconfig-controller/pkg/config"
-	"dockerconfig-controller/pkg/logger"
-	"dockerconfig-controller/pkg/store/inmem"
+	"github.com/krijohs/dcc/pkg/config"
+	"github.com/krijohs/dcc/pkg/logger"
+	"github.com/krijohs/dcc/pkg/store/inmem"
 
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"

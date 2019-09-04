@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"dockerconfig-controller/pkg/logger"
+	"github.com/krijohs/dcc/pkg/logger"
 
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
