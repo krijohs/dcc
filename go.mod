@@ -1,4 +1,4 @@
-module dockerconfig-controller
+module github.com/krijohs/dcc
 
 go 1.12
 
