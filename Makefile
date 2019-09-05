@@ -1,7 +1,7 @@
 SHELL := $(shell which bash)
 ENV = /usr/bin/env
 
-VERSION=$(shell git describe)
+VERSION=$(shell git describe --tags --always)
 
 .SHELLFLAGS = -c
 .SILENT: ;
@@ -9,7 +9,7 @@ VERSION=$(shell git describe)
 .NOTPARALLEL: ;
 .EXPORT_ALL_VARIABLES: ;
 
-.PHONY: dep build test test-coverage
+.PHONY: dep build test coverage
 
 dep:
 	go mod download
