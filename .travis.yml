@@ -1,0 +1,19 @@
+language: go
+
+go:
+  - 1.13.x
+
+git:
+  depth: 1
+
+notifications:
+  email: false
+
+before_script:
+  - test-reporter before-build
+
+script:
+  - go test -race -coverprofile c.out
+
+after_script:
+  - test-reporter after-build --coverage-input-type gocov --exit-code $TRAVIS_TEST_RESULT
