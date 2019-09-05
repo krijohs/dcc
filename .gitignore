@@ -1,3 +1,5 @@
 .vscode
 temp
 ./config.yaml
+coverage.txt
+profile.out

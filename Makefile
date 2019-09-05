@@ -20,9 +20,9 @@ build:
 test:
 	go test -race -v ./... -cover
 
-test-coverage:
-	go test -race -v -cover -coverprofile=coverage/out ./...
-	go tool cover -html=coverage/out -o coverage/coverage.html
-	rm coverage/out
-	go get -u github.com/jstemmer/go-junit-report
-	go test ./... -v 2>&1 | go-junit-report > report.xml
+coverage:
+	go test -race -coverprofile=profile.out -covermode=atomic ./...
+	if [ -f profile.out ]; then
+			cat profile.out >> coverage.txt
+			rm profile.out
+	fi

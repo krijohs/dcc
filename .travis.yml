@@ -10,4 +10,7 @@ notifications:
   email: false
 
 script:
-  - go test -race -coverprofile c.out ./...
+  - make coverage
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
