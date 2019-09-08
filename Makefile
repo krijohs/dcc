@@ -9,13 +9,16 @@ VERSION=$(shell git describe --tags --always)
 .NOTPARALLEL: ;
 .EXPORT_ALL_VARIABLES: ;
 
-.PHONY: dep build test coverage
+.PHONY: dep build build-image test coverage
 
 dep:
 	go mod download
 
 build:
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix nocgo -o ./dcc cmd/dcc/*.go
+
+build-image:
+	docker build -t krijoh/dcc:${VERSION} -f Dockerfile .
 
 test:
 	go test -race -v ./... -cover
