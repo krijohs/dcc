@@ -63,7 +63,7 @@ func TestHandler_HandleItem(t *testing.T) {
 				log: logrus.NewEntry(&logrus.Logger{}),
 				config: Config{
 					GracePeriod: 5,
-					Registries:  []config.DockerRegistry{config.DockerRegistry{Name: "test", Config: "config"}},
+					Registries:  []config.DockerRegistry{{Name: "test", Config: "config"}},
 				},
 				client: fake.NewSimpleClientset(),
 				store:  inmem.NewStore(),
@@ -77,7 +77,7 @@ func TestHandler_HandleItem(t *testing.T) {
 				log: logrus.NewEntry(&logrus.Logger{}),
 				config: Config{
 					GracePeriod: 5,
-					Registries:  []config.DockerRegistry{config.DockerRegistry{Name: "test", Config: "config"}},
+					Registries:  []config.DockerRegistry{{Name: "test", Config: "config"}},
 				},
 				client: fake.NewSimpleClientset(),
 				store:  inmem.NewStore(),
@@ -91,7 +91,7 @@ func TestHandler_HandleItem(t *testing.T) {
 				log: logrus.NewEntry(&logrus.Logger{}),
 				config: Config{
 					GracePeriod: 5,
-					Registries:  []config.DockerRegistry{config.DockerRegistry{Name: "test", Config: "config"}},
+					Registries:  []config.DockerRegistry{{Name: "test", Config: "config"}},
 				},
 				client: fake.NewSimpleClientset(),
 				store:  inmem.NewStore(),

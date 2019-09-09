@@ -19,7 +19,7 @@ func TestLoad(t *testing.T) {
 			want: Config{
 				KubeConf: "",
 				Registries: []DockerRegistry{
-					DockerRegistry{
+					{
 						Name:   "testregistry",
 						Config: "{\n  \"auths\": {\n    \"test.registry.com:80\": {\n      \"auth\": \"lf8pc3RvZmZlci5qb2hhbnNzb246MzU3N2FsYmlu\"\n    }\n  },\n  \"HttpHeaders\": {\n    \"User-Agent\": \"Docker-Client/19.03.1-ce (linux)\"\n  }\n}", Exclude: []string{"kube-public", "kube-system"}, Include: []string(nil)}},
 				LogFormat: "text", LogLevel: "info", LogFile: "stdout",
