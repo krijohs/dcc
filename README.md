@@ -3,9 +3,8 @@
 [![Build Status](https://travis-ci.org/krijohs/dcc.svg?branch=master)](https://travis-ci.org/krijohs/dcc)
 [![codecov](https://codecov.io/gh/krijohs/dcc/branch/master/graph/badge.svg)](https://codecov.io/gh/krijohs/dcc)
 
-This is an controller for Kubernetes which creates Docker config in all namespaces except excluded ones.
-This makes it possible to define a Docker config for a private repository in a config.yaml file which then will be created
-in all namespaces and can be used as to pull Docker images from private repositories.
+This is an controller for Kubernetes which creates a Docker config secret to use for authentication for private Docker repositories.
+The secret will be created in all namespaces except excluded ones.
 
 ## Usage
 
@@ -29,7 +28,7 @@ registries:
         }
       }
 ```
-If the kubeconf is empty, the application assumes that it's run in Kubernetes. Multiple registries can be defined by creating a new item below registries key.
+If the kubeconf is empty, the application assumes that it's run inside Kubernetes. Multiple registries can be defined by creating a new item below registries key.
 
 This file can be placed in the same directory the binary file is located, in $HOME/.dockerconfig or in /etc/dockerconfig.
 
