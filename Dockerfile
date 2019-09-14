@@ -16,7 +16,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix nocgo -o /d
 
 # go image
 FROM scratch
-LABEL name="docker-config-controller" maintainer="Kristoffer Johansson <johanson.kristoffer@gmail.com>"
+LABEL name="docker-config-controller" maintainer="Kristoffer Johansson <kristoffer.johansson@gmx.com>"
 
 COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /dcc ./
