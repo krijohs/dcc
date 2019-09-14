@@ -20,6 +20,9 @@ build:
 build-image:
 	docker build -t krijoh/dcc:${VERSION} -f Dockerfile .
 
+push-image:
+	docker push krijoh/dcc:${VERSION}
+
 test:
 	go test -race -v ./... -cover
 

@@ -1,5 +1,8 @@
 language: go
 
+services:
+  - docker
+
 go:
   - 1.13.x
 
@@ -14,3 +17,6 @@ script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - make build-image
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - make push-image
