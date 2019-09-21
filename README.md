@@ -4,7 +4,8 @@
 [![codecov](https://codecov.io/gh/krijohs/dcc/branch/master/graph/badge.svg)](https://codecov.io/gh/krijohs/dcc)
 
 This is an controller for Kubernetes which creates a Docker config secret to use for authentication for private Docker repositories.
-The secret will be created in all namespaces except excluded ones.
+The secret will be created in all namespaces except excluded ones, and the controller will listen on namespace state changes and automatically create the secret on a newly added namespace.
+The controller can be used to just replicate secrets over namespaces and it is not bound to just to be used with Docker registries even though it was the intention when creating it.
 
 ## Usage
 
@@ -32,4 +33,5 @@ If the kubeconf is empty, the application assumes that it's run inside Kubernete
 
 This file can be placed in the same directory the binary file is located, in $HOME/.dockerconfig or in /etc/dockerconfig.
 
-
+## TODO
+Example Kubernetes deployment
