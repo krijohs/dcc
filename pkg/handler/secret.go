@@ -27,24 +27,6 @@ func (h *Handler) newSecret(namespace, name string, b []byte) (v1.Secret, error)
 	return *secret, nil
 }
 
-func (h *Handler) updateSecret(namespace, name string, b []byte) (v1.Secret, error) {
-	secret, err := h.client.CoreV1().Secrets(namespace).Update(&v1.Secret{
-		TypeMeta: metav1.TypeMeta{
-			Kind: "Secret",
-		},
-		ObjectMeta: metav1.ObjectMeta{
-			Name:      name,
-			Namespace: namespace,
-		},
-		Data: makeBytesDockerCfg(b),
-	})
-	if err != nil {
-		return v1.Secret{}, errors.Wrap(err, "unable to update secret in namespace")
-	}
-
-	return *secret, nil
-}
-
 func (h *Handler) secretExists(namespace, name string, data []byte) (bool, error) {
 	secret, err := h.client.CoreV1().Secrets(namespace).Get(name, metav1.GetOptions{})
 	if err != nil {

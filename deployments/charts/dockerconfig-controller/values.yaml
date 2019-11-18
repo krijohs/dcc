@@ -1,0 +1,45 @@
+image:
+  repository: krijoh/dcc
+  tag: 0.2.0
+
+labels: {}
+annotations: {}
+
+nodeSelector: {}
+  # key: value
+affinity: {}
+  # key: value
+
+resources: {}
+
+replicas: 1
+
+
+podDisruptionBudget:
+  minAvailable: 2
+
+rbac:
+  create: true
+serviceAccount:
+  create: true
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+config:
+  kubeconf: "" # should be empty when application is run inside kubernetes
+  registries:
+    - name: privateregistry
+      exclude:
+        - kube-public
+        - kube-system
+      config: |
+        {
+          "auths": {
+            "private.docker.reg": {
+              "auth": "xxx"
+            }
+          },
+          "HttpHeaders": {
+            "User-Agent": "Docker-Client/19.03.1-ce (linux)"
+          }
+        }

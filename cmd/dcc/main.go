@@ -28,7 +28,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	log := loggr.WithField("app", "docker-config-controller")
+	log := loggr.WithField("app", "dockerconfig-controller")
 
 	client, err := k8sclient.New(cfg.KubeConf)
 	if err != nil {

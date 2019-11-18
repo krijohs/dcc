@@ -1,0 +1,14 @@
+apiVersion: v1
+name: dockerconfig-controller
+version: 0.2.0
+appVersion: 0.2.0
+description: A controller which add Docker configs for private repos to namespaces
+keywords:
+- docker
+- config
+- controller
+sources:
+- https://github.com/krijohs/dcc
+maintainers:
+- name: krijohs
+  email: kristoffer.johansson@gmx.com

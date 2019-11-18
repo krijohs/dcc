@@ -3,15 +3,16 @@
 [![Build Status](https://travis-ci.org/krijohs/dcc.svg?branch=master)](https://travis-ci.org/krijohs/dcc)
 [![codecov](https://codecov.io/gh/krijohs/dcc/branch/master/graph/badge.svg)](https://codecov.io/gh/krijohs/dcc)
 
-This is an controller for Kubernetes which creates a Docker config secret to use for authentication for private Docker repositories.
+This is a controller for Kubernetes which creates a Docker config secret in namespaces which later can be used for authentication when using private Docker repositories.
 The secret will be created in all namespaces except excluded ones, and the controller will listen on namespace state changes and automatically create the secret on a newly added namespace.
-The controller can be used to just replicate secrets over namespaces and it is not bound to just to be used with Docker registries even though it was the intention when creating it.
 
 ## Usage
 
-A config.yaml is required which should have the following structure.
+The application can be deployed using the Helm chart located in 'deployments/charts/dockerconfig-controller', use the values.yaml file to add configuration for your private Docker registries.
+
+The config key in values.yaml file is required and should have the following structure.
 ```yaml
-kubeconf: "/path/to/kubeconf"
+kubeconf: "" # empty when run inside kubernetes
 registries:
   - name: privateregistry
     exclude:
@@ -29,9 +30,3 @@ registries:
         }
       }
 ```
-If the kubeconf is empty, the application assumes that it's run inside Kubernetes. Multiple registries can be defined by creating a new item below registries key.
-
-This file can be placed in the same directory the binary file is located, in $HOME/.dockerconfig or in /etc/dockerconfig.
-
-## TODO
-Example Kubernetes deployment

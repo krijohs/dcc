@@ -42,7 +42,6 @@ func New(log logger.Logger, config Config, client kubernetes.Interface, store St
 
 const (
 	add = iota
-	update
 	remove
 )
 
@@ -54,11 +53,6 @@ func (h *Handler) HandleItem(action int, ns string) error {
 	case add:
 		if err := h.handleAdd(ns, h.config.Registries); err != nil {
 			return errors.Wrapf(err, "unable to handle add of registries in namespace %s", ns)
-		}
-
-	case update:
-		if err := h.handleUpdate(ns, h.config.Registries); err != nil {
-			return errors.Wrapf(err, "unable to handle update of registries in namespace %s", ns)
 		}
 
 	case remove:
@@ -125,33 +119,6 @@ func shouldHandle(ns string, reg config.DockerRegistry) bool {
 	}
 
 	return true
-}
-
-func (h *Handler) handleUpdate(ns string, registries []config.DockerRegistry) error {
-	for _, reg := range registries {
-		if !shouldHandle(ns, reg) {
-			h.log.Infof("skipping namespace %s since it is filtered out", ns)
-			return nil
-		}
-
-		registryCfg := []byte(reg.Config)
-		exists, err := h.secretExists(ns, reg.Name, registryCfg)
-		if err != nil {
-			return errors.Wrap(err, "unable to check if docker registry secret exists")
-		}
-		if exists {
-			return nil
-		}
-
-		if _, err := h.updateSecret(ns, reg.Name, registryCfg); err != nil {
-			return errors.Wrap(err, "unable to create docker registry secret in namespace")
-		}
-
-		h.store.Insert(ns, registryCfg)
-		h.log.Infof("updated docker registry secret %s in namespace %s", reg.Name, ns)
-	}
-
-	return nil
 }
 
 func (h *Handler) handleRemove(ns string, registries []config.DockerRegistry) {

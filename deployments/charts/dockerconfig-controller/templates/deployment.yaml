@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "dockerconfig-controller.fullname" . }}
+  labels:
+    app: {{ template "dockerconfig-controller.name" . }}
+    chart: {{ template "dockerconfig-controller.chart" . }}
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+    {{- if .Values.labels }}
+    {{- toYaml .Values.labels | nindent 4 }}
+    {{- end }}
+  {{- with .Values.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  replicas: {{ default 1 .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "dockerconfig-controller.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "dockerconfig-controller.name" . }}
+        chart: {{ template "dockerconfig-controller.chart" . }}
+        release: {{ .Release.Name | quote }}
+        heritage: {{ .Release.Service | quote }}
+    spec:
+      serviceAccountName: {{ template "dockerconfig-controller.fullname" . }}
+      terminationGracePeriodSeconds: 60
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+        {{ toYaml .Values.nodeSelector | nindent 8 }}
+      {{- end }}
+      {{- if .Values.affinity }}
+      affinity:
+        {{ toYaml .Values.affinity | nindent 8 }}
+      {{- end }}
+      containers:
+      - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        name: {{ template "dockerconfig-controller.fullname" . }}
+        resources:
+          {{ toYaml .Values.resources | nindent 10 }}
+        envFrom:
+          - secretRef:
+              name: {{ template "dockerconfig-controller.fullname" . }}
+        volumeMounts:
+        - mountPath: /etc/dockerconfig
+          name: config
+      volumes:
+      - name: config
+        secret:
+          secretName: {{ template "dockerconfig-controller.fullname" . }}

@@ -4,7 +4,6 @@ ENV = /usr/bin/env
 VERSION=$(shell git describe --tags --always)
 
 .SHELLFLAGS = -c
-.SILENT: ;
 .ONESHELL: ;
 .NOTPARALLEL: ;
 .EXPORT_ALL_VARIABLES: ;

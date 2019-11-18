@@ -1,0 +1,33 @@
+{{ if .Values.rbac.create }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ template "dockerconfig-controller.serviceAccountName" . }}
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ template "dockerconfig-controller.fullname" . }}
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+- apiGroups: [""]
+  resources: ["namespaces"]
+  verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ template "dockerconfig-controller.fullname" . }}
+subjects:
+- kind: ServiceAccount
+  name: {{ template "dockerconfig-controller.serviceAccountName" . }}
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: {{ template "dockerconfig-controller.fullname" . }}
+  apiGroup: rbac.authorization.k8s.io
+{{- end}}
